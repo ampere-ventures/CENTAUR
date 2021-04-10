@@ -14,7 +14,7 @@ Author: Julius Susanto
 Last edited: January 2018
 """
 
-from PyQt4 import QtCore, QtGui
+from PyQt5 import QtCore, QtGui, QtWidgets
 import numpy as np
 import csv
 
@@ -134,12 +134,12 @@ def write_tables_to_csv_file(folder_name, variables, lowfi_tables):
     except:
         return False
 
-class CentaurTable(QtGui.QTableWidget): 
+class CentaurTable(QtWidgets.QTableWidget): 
     """Overloaded version of the QTableWidget which adds Copy/Paste functionality to the table."""
 
     def __init__(self, main_window, data = [], headings = [], allowCopy = True, allowPaste = True, readOnly = False, alternatingRowColors = False, allowShortcut = True):
         """Constructor which will set up Copy & Paste actions and populate table headings and data."""
-        super(QtGui.QTableWidget, self).__init__()                
+        super(QtWidgets.QTableWidget, self).__init__()                
         self.setup(main_window, allowCopy, allowPaste, allowShortcut)
         if len(data) > 0:
             self.fill_table(data, readOnly)
@@ -153,7 +153,7 @@ class CentaurTable(QtGui.QTableWidget):
         self.main_window = main_window
         
         if allowCopy:
-            copyAction = QtGui.QAction('&Copy', self)
+            copyAction = QtWidgets.QAction('&Copy', self)
             if allowShortcut:
                 copyAction.setShortcut('Ctrl+C')
             copyAction.setStatusTip('Copy')
@@ -161,7 +161,7 @@ class CentaurTable(QtGui.QTableWidget):
             self.addAction(copyAction)            
 
         if allowPaste:                
-            pasteAction = QtGui.QAction('&Paste', self)
+            pasteAction = QtWidgets.QAction('&Paste', self)
             if allowShortcut:
                 pasteAction.setShortcut('Ctrl+V')
             pasteAction.setStatusTip('Paste')
@@ -170,7 +170,7 @@ class CentaurTable(QtGui.QTableWidget):
 
         if allowCopy or allowPaste:                
             self.setContextMenuPolicy(QtCore.Qt.ActionsContextMenu)
-            self.setSelectionMode(QtGui.QAbstractItemView.ContiguousSelection)
+            self.setSelectionMode(QtWidgets.QAbstractItemView.ContiguousSelection)
 
             
     def copy_fn(self):
@@ -208,7 +208,7 @@ class CentaurTable(QtGui.QTableWidget):
                 table_columns = self.columnCount()
                 active_row = self.selectedIndexes()[0].row()
                 active_column = self.selectedIndexes()[0].column()
-                selection = QtGui.QItemSelection(self.model().index(active_row, active_column), self.model().index(active_row + data_rows - 1, active_column + data_columns - 1))
+                selection = QtWidgets.QItemSelection(self.model().index(active_row, active_column), self.model().index(active_row + data_rows - 1, active_column + data_columns - 1))
                 self.selectionModel().select(selection, QItemSelectionModel.ClearAndSelect)
                 if active_row + data_rows > table_rows or active_column + data_columns > (table_columns - 1):
                     self.main_window.show_status_message("Clipboard data too large.", error = True, beep = True)
@@ -231,7 +231,7 @@ class CentaurTable(QtGui.QTableWidget):
                 self.setColumnCount(data_columns)
                 for r in range(0, data_rows):
                     for c in range(0, data_columns):
-                        item = QtGui.QTableWidgetItem()
+                        item = QtWidgets.QTableWidgetItem()
                         # Convert complex numbers from 0j to 0 and (1+1j) to 1+1j
                         if convertComplexNumbers and isinstance(data[r][c], np.complex):
                             re = data[r][c].real

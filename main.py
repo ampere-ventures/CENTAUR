@@ -15,7 +15,7 @@ Last edited: January 2018
 """
 
 import os, sys
-from PyQt4 import QtGui
+from PyQt5 import QtCore, QtGui, QtWidgets
 
 from gui.gui_solar import solar_ui
 from gui.gui_loads import loads_ui
@@ -27,7 +27,7 @@ from gui.gui_sim import sim_ui
 import matplotlib.backends.backend_tkagg
 import gui.globals as globals
 
-class Window(QtGui.QWidget):
+class Window(QtWidgets.QWidget):
     def __init__(self):
         super(Window, self).__init__()
         
@@ -45,13 +45,13 @@ class Window(QtGui.QWidget):
         """
         Tabs
         """
-        tab_widget = QtGui.QTabWidget()
-        tab1 = QtGui.QWidget()        
-        tab2 = QtGui.QWidget() 
-        tab3 = QtGui.QWidget()
-        tab4 = QtGui.QWidget()
-        tab5 = QtGui.QWidget()
-        tab6 = QtGui.QWidget()
+        tab_widget = QtWidgets.QTabWidget()
+        tab1 = QtWidgets.QWidget()        
+        tab2 = QtWidgets.QWidget() 
+        tab3 = QtWidgets.QWidget()
+        tab4 = QtWidgets.QWidget()
+        tab5 = QtWidgets.QWidget()
+        tab6 = QtWidgets.QWidget()
         self.tab_widget = tab_widget
         
         tab_widget.addTab(tab1, "Project")
@@ -76,30 +76,30 @@ class Window(QtGui.QWidget):
         self.page6.setup(self)
         
         self.pages = [self.page1, self.page2, self.page3, self.page4, self.page5]
-        
+                
         """
         Actions
         """
-        exitAction = QtGui.QAction(QtGui.QIcon('media\exit.png'), '&Exit', self)        
+        exitAction = QtWidgets.QAction(QtGui.QIcon('media\exit.png'), '&Exit', self)        
         exitAction.setShortcut('Ctrl+Q')
         exitAction.setStatusTip('Exit application')
-        exitAction.triggered.connect(QtGui.qApp.quit)
+        exitAction.triggered.connect(QtWidgets.qApp.quit)
 
-        saveAsAction = QtGui.QAction(QtGui.QIcon('media\saveas.ico'), 'Save &As', self)
+        saveAsAction = QtWidgets.QAction(QtGui.QIcon('media\saveas.ico'), 'Save &As', self)
         saveAsAction.setShortcut('Ctrl+A')
         saveAsAction.setStatusTip('Save project as')
         saveAsAction.triggered.connect(self.save_as_fn)
 
-        openAction = QtGui.QAction(QtGui.QIcon('media\open.ico'), '&Open', self)
+        openAction = QtWidgets.QAction(QtGui.QIcon('media\open.ico'), '&Open', self)
         openAction.setShortcut('Ctrl+O')
         openAction.setStatusTip('Open project')
         openAction.triggered.connect(self.open_fn)
         
-        aboutAction = QtGui.QAction('&About CENTAUR', self)
+        aboutAction = QtWidgets.QAction('&About CENTAUR', self)
         aboutAction.setStatusTip('About CENTAUR')
         aboutAction.triggered.connect(self.about_dialog)
         
-        helpAction = QtGui.QAction('&User Manual', self)
+        helpAction = QtWidgets.QAction('&User Manual', self)
         helpAction.setShortcut('F1')
         helpAction.setStatusTip('User documentation')
         helpAction.triggered.connect(self.user_manual)   
@@ -107,7 +107,7 @@ class Window(QtGui.QWidget):
         """
         Menubar
         """
-        menu_bar = QtGui.QMenuBar() 
+        menu_bar = QtWidgets.QMenuBar() 
         fileMenu = menu_bar.addMenu('&File')
         fileMenu.addAction(saveAsAction)
         fileMenu.addAction(openAction)
@@ -121,8 +121,8 @@ class Window(QtGui.QWidget):
         """
         Status line.
         """
-        self.status_message = QtGui.QStatusBar()        
-        vbox = QtGui.QVBoxLayout()
+        self.status_message = QtWidgets.QStatusBar()        
+        vbox = QtWidgets.QVBoxLayout()
         vbox.addWidget(menu_bar)
         vbox.addWidget(tab_widget) 
         vbox.addWidget(self.status_message)        
@@ -130,7 +130,7 @@ class Window(QtGui.QWidget):
         
     def centre(self):
         qr = self.frameGeometry()
-        cp = QtGui.QDesktopWidget().availableGeometry().center()
+        cp = QtWidgets.QDesktopWidget().availableGeometry().center()
         qr.moveCenter(cp)
         self.move(qr.topLeft())
         
@@ -149,13 +149,13 @@ class Window(QtGui.QWidget):
         else:
             self.status_message.setStyleSheet('')
         if beep:
-            QtGui.QApplication.beep()
+            QtWidgets.QApplication.beep()
         self.status_message.showMessage(message)
     
     def save_as_fn(self):
         """Function for the Save As action."""
         
-        fname = QtGui.QFileDialog.getSaveFileName(self, "Save Data File As", "", "CENTAUR project files (*.ctr)")
+        fname = QtWidgets.QFileDialog.getSaveFileName(self, "Save Data File As", "", "CENTAUR project files (*.ctr)")
         
         if fname:
             for p in self.pages:
@@ -183,7 +183,7 @@ class Window(QtGui.QWidget):
         ##########################################################
         # TODO: Confirmation for opening file if data is unsaved #
         ##########################################################
-        fname = QtGui.QFileDialog.getOpenFileName(self, "Open Data File", "", "CENTAUR project files (*.ctr)")
+        fname = QtWidgets.QFileDialog.getOpenFileName(self, "Open Data File", "", "CENTAUR project files (*.ctr)")
         if fname:
             if globals.load_project_from_file(fname):                
                 self.refresh_data()
@@ -199,22 +199,21 @@ class Window(QtGui.QWidget):
     
     def about_dialog(self):
         """Show About dialog box"""
-        QtGui.QMessageBox.about(self, "About CENTAUR",
+        QtWidgets.QMessageBox.about(self, "About CENTAUR",
                 """<b>CENTAUR</b> is a hybrid power system simulation package.
                    <p>
-                   Version: <b>v1.0<b><p>
+                   Version: <b>v1.1<b><p>
                    <p>
-                   <p>&copy; 2018 Julius Susanto</p>
+                   <p>&copy; 2021 Julius Susanto</p>
                    <p>All rights reserved.</p>  
                    """)
     
-def main():
-    app = QtGui.QApplication(sys.argv)
+if __name__ == '__main__':
+    app = QtCore.QCoreApplication.instance()
+    if app is None:
+        app = QtWidgets.QApplication(sys.argv)
+
     w = Window()
     w.show()
     
     sys.exit(app.exec_())
-
-
-if __name__ == '__main__':
-    main()

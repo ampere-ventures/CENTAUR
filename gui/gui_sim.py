@@ -14,43 +14,43 @@ Authors: Julius Susanto
 Last edited: January 2018
 """
 
-from PyQt4 import QtCore, QtGui
+from PyQt5 import QtCore, QtGui, QtWidgets
 import numpy as np
 import matplotlib.pyplot as plt
 import gui.globals as globals
 import gui.utility as utility
 from engine.chron_sim import run_sim
                       
-class sim_ui(QtGui.QWidget): 
+class sim_ui(QtWidgets.QWidget): 
     
     def setup(self, window):   
         """Set up and initialise simulation tab"""
         
         self.main_window = window        
         
-        run_button = QtGui.QPushButton("Run")
+        run_button = QtWidgets.QPushButton("Run")
         run_button.setFixedWidth(80)
         
-        title1 = QtGui.QLabel('Output Window')
+        title1 = QtWidgets.QLabel('Output Window')
         title1.setFont(QtGui.QFont('arial', weight=QtGui.QFont.Bold))
         
-        clear_button = QtGui.QPushButton("Clear")
+        clear_button = QtWidgets.QPushButton("Clear")
         clear_button.setFixedWidth(80)
         
         font = QtGui.QFont("Courier New",10)
-        self.textBox = QtGui.QTextEdit()
+        self.textBox = QtWidgets.QTextEdit()
         self.textBox.setReadOnly(True)
         self.textBox.setFont(font)
         self.textBox.setMinimumSize(QtCore.QSize(1000,400))
         
-        title2 = QtGui.QLabel('Plot Outputs')
+        title2 = QtWidgets.QLabel('Plot Outputs')
         title2.setFont(QtGui.QFont('arial', weight=QtGui.QFont.Bold))
         
-        self.combo_plot = QtGui.QComboBox()
+        self.combo_plot = QtWidgets.QComboBox()
         self.combo_plot.setFixedWidth(150)
-        plot_button = QtGui.QPushButton("Plot")
+        plot_button = QtWidgets.QPushButton("Plot")
         
-        layout = QtGui.QGridLayout()
+        layout = QtWidgets.QGridLayout()
         layout.addWidget(run_button, 0, 0)
         layout.addWidget(title1, 1, 0)
         layout.addWidget(clear_button, 1, 1)
@@ -74,7 +74,7 @@ class sim_ui(QtGui.QWidget):
         menu = self.textBox.createStandardContextMenu(point)
         
         # Include clear log action
-        clearLog = QtGui.QAction('Clear output window', self)
+        clearLog = QtWidgets.QAction('Clear output window', self)
         clearLog.setStatusTip('Clear output window')
         clearLog.triggered.connect(self.clear_fn)
         
@@ -229,7 +229,7 @@ class sim_ui(QtGui.QWidget):
         """ Plot result outputs """
         if plt.fignum_exists(1):
             # Do nothing if a plot is already open
-            QtGui.QMessageBox.warning(self, 'Warning', "A plot is already open. Please close to create a new plot.", QtGui.QMessageBox.Ok)
+            QtWidgets.QMessageBox.warning(self, 'Warning', "A plot is already open. Please close to create a new plot.", QtWidgets.QMessageBox.Ok)
         else:
             fig = plt.figure(1, facecolor='white', figsize=(16,7))
             if self.combo_plot.currentText() == 'Battery SoC':

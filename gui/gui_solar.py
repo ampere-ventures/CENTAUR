@@ -14,111 +14,111 @@ Authors: Julius Susanto
 Last edited: January 2018
 """
 
-from PyQt4 import QtCore, QtGui
+from PyQt5 import QtGui, QtWidgets
 import numpy as np
 import gui.globals as globals
 import gui.utility as utility
                       
-class solar_ui(QtGui.QWidget): 
+class solar_ui(QtWidgets.QWidget): 
     
     def setup(self, window):
         """Set up and initialise solar PV tab"""
         
         self.main_window = window        
         
-        title1 = QtGui.QLabel('Site Location')
+        title1 = QtWidgets.QLabel('Site Location')
         title1.setFont(QtGui.QFont('arial', weight=QtGui.QFont.Bold))
         
-        label1 = QtGui.QLabel('Latitude:')
+        label1 = QtWidgets.QLabel('Latitude:')
         label1.setFixedWidth(100)
         
-        self.edit_lat = QtGui.QLineEdit()
+        self.edit_lat = QtWidgets.QLineEdit()
         self.edit_lat.setFixedWidth(100)
         
-        label2 = QtGui.QLabel('Longitude:')
+        label2 = QtWidgets.QLabel('Longitude:')
         label2.setFixedWidth(100)
         
-        self.edit_lon = QtGui.QLineEdit()
+        self.edit_lon = QtWidgets.QLineEdit()
         self.edit_lon.setFixedWidth(100)
         
-        title2 = QtGui.QLabel('Solar resource data')
+        title2 = QtWidgets.QLabel('Solar resource data')
         title2.setFont(QtGui.QFont('arial', weight=QtGui.QFont.Bold))
         
-        update_button = QtGui.QPushButton("Update")
+        update_button = QtWidgets.QPushButton("Update")
         update_button.setFixedWidth(80)
         
         headings = ['Ktm', 'Tamb']
         self.tableWidget = SolarTable(window, headings = headings, alternatingRowColors = True)
         self.tableWidget.setMinimumHeight(400)
         
-        vline = QtGui.QFrame()
-        vline.setFrameStyle(QtGui.QFrame.VLine | QtGui.QFrame.Sunken)
+        vline = QtWidgets.QFrame()
+        vline.setFrameStyle(QtWidgets.QFrame.VLine | QtWidgets.QFrame.Sunken)
         
-        title3 = QtGui.QLabel('Solar PV system')
+        title3 = QtWidgets.QLabel('Solar PV system')
         title3.setFont(QtGui.QFont('arial', weight=QtGui.QFont.Bold))
         
-        label4a = QtGui.QLabel('PV array DC output:')
-        label4b = QtGui.QLabel('Wp')
+        label4a = QtWidgets.QLabel('PV array DC output:')
+        label4b = QtWidgets.QLabel('Wp')
         
-        self.edit_Pstc = QtGui.QLineEdit()
+        self.edit_Pstc = QtWidgets.QLineEdit()
         self.edit_Pstc.setFixedWidth(100)
         
-        label5 = QtGui.QLabel('PV system coupling:')
-        self.pv_coupling = QtGui.QComboBox()
+        label5 = QtWidgets.QLabel('PV system coupling:')
+        self.pv_coupling = QtWidgets.QComboBox()
         self.pv_coupling.addItems(["AC","DC"])
         
-        label6a = QtGui.QLabel('PV inverter AC output:')
-        label6b = QtGui.QLabel('Wac')
+        label6a = QtWidgets.QLabel('PV inverter AC output:')
+        label6b = QtWidgets.QLabel('Wac')
         
-        self.edit_Pinv = QtGui.QLineEdit()
+        self.edit_Pinv = QtWidgets.QLineEdit()
         self.edit_Pinv.setFixedWidth(100)
         
-        label7a = QtGui.QLabel('Power temperature coefficient:')
-        label7b = QtGui.QLabel('%/deg C')
+        label7a = QtWidgets.QLabel('Power temperature coefficient:')
+        label7b = QtWidgets.QLabel('%/deg C')
         
-        self.edit_gamma = QtGui.QLineEdit()
+        self.edit_gamma = QtWidgets.QLineEdit()
         self.edit_gamma.setFixedWidth(100)
         
-        label8a = QtGui.QLabel('Enviromental derating:')
-        label8b = QtGui.QLabel('%')
+        label8a = QtWidgets.QLabel('Enviromental derating:')
+        label8b = QtWidgets.QLabel('%')
         
-        self.edit_ke = QtGui.QLineEdit()
+        self.edit_ke = QtWidgets.QLineEdit()
         self.edit_ke.setFixedWidth(100)
         
-        label9a = QtGui.QLabel('Manufacturer tolerance derating:')
-        label9b = QtGui.QLabel('%')
+        label9a = QtWidgets.QLabel('Manufacturer tolerance derating:')
+        label9b = QtWidgets.QLabel('%')
         
-        self.edit_km = QtGui.QLineEdit()
+        self.edit_km = QtWidgets.QLineEdit()
         self.edit_km.setFixedWidth(100)
         
-        label10a = QtGui.QLabel('Inverter / SCC efficiency:')
-        label10b = QtGui.QLabel('%')
+        label10a = QtWidgets.QLabel('Inverter / SCC efficiency:')
+        label10b = QtWidgets.QLabel('%')
         
-        self.edit_eff = QtGui.QLineEdit()
+        self.edit_eff = QtWidgets.QLineEdit()
         self.edit_eff.setFixedWidth(100)
         
-        title4 = QtGui.QLabel('Solar PV Array Configuration')
+        title4 = QtWidgets.QLabel('Solar PV Array Configuration')
         title4.setFont(QtGui.QFont('arial', weight=QtGui.QFont.Bold))
         
-        label11a = QtGui.QLabel('Tilt angle:')
-        label11b = QtGui.QLabel('degrees')
+        label11a = QtWidgets.QLabel('Tilt angle:')
+        label11b = QtWidgets.QLabel('degrees')
         
-        self.edit_tilt = QtGui.QLineEdit()
+        self.edit_tilt = QtWidgets.QLineEdit()
         self.edit_tilt.setFixedWidth(100)
         
-        label12a = QtGui.QLabel('Azimuth angle:')
-        label12b = QtGui.QLabel('degrees')
+        label12a = QtWidgets.QLabel('Azimuth angle:')
+        label12b = QtWidgets.QLabel('degrees')
         
-        self.edit_azimuth = QtGui.QLineEdit()
+        self.edit_azimuth = QtWidgets.QLineEdit()
         self.edit_azimuth.setFixedWidth(100)
         
-        label13a = QtGui.QLabel('Albedo:')
-        label13b = QtGui.QLabel('%')
+        label13a = QtWidgets.QLabel('Albedo:')
+        label13b = QtWidgets.QLabel('%')
         
-        self.edit_albedo = QtGui.QLineEdit()
+        self.edit_albedo = QtWidgets.QLineEdit()
         self.edit_albedo.setFixedWidth(100)
         
-        layout = QtGui.QGridLayout()
+        layout = QtWidgets.QGridLayout()
         layout.addWidget(title1, 0, 0)
         layout.addWidget(label1, 1, 0)
         layout.addWidget(self.edit_lat, 1, 1)
@@ -275,6 +275,6 @@ class SolarTable(utility.CentaurTable):
                 for r in range(0, data_rows):
                     # Update real columns
                     for c in range(2):
-                        item = QtGui.QTableWidgetItem()                        
+                        item = QtWidgets.QTableWidgetItem()                        
                         item.setText(str(data[r][c]))      
                         self.setItem(r, c, item)

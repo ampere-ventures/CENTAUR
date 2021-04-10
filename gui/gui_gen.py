@@ -14,50 +14,49 @@ Authors: Julius Susanto
 Last edited: January 2018
 """
 
-from PyQt4 import QtCore, QtGui
-import numpy as np
+from PyQt5 import QtGui, QtWidgets
 import gui.globals as globals
 import gui.utility as utility
                       
-class gen_ui(QtGui.QWidget): 
+class gen_ui(QtWidgets.QWidget): 
     
     def setup(self, window):   
         """Set up and initialise generator tab"""
         
         self.main_window = window        
         
-        title1 = QtGui.QLabel('Generator configuration')
+        title1 = QtWidgets.QLabel('Generator configuration')
         title1.setFont(QtGui.QFont('arial', weight=QtGui.QFont.Bold))
         
-        label1 = QtGui.QLabel('No. generators:')
-        self.edit_nGen = QtGui.QLineEdit()
+        label1 = QtWidgets.QLabel('No. generators:')
+        self.edit_nGen = QtWidgets.QLineEdit()
         self.edit_nGen.setFixedWidth(100)
         
-        label2a = QtGui.QLabel('Nominal capacity:')
-        label2b = QtGui.QLabel('kW')
+        label2a = QtWidgets.QLabel('Nominal capacity:')
+        label2b = QtWidgets.QLabel('kW')
         
-        self.edit_Pgen = QtGui.QLineEdit()
+        self.edit_Pgen = QtWidgets.QLineEdit()
         self.edit_Pgen.setFixedWidth(100)
         
-        label3a = QtGui.QLabel('Minimum generator loading:')
-        label3b = QtGui.QLabel('%')
+        label3a = QtWidgets.QLabel('Minimum generator loading:')
+        label3b = QtWidgets.QLabel('%')
         
-        self.edit_Pmin = QtGui.QLineEdit()
+        self.edit_Pmin = QtWidgets.QLineEdit()
         self.edit_Pmin.setFixedWidth(100)
         
-        label4a = QtGui.QLabel('Specific fuel consumption:')
-        label4b = QtGui.QLabel('litres/kWh')
+        label4a = QtWidgets.QLabel('Specific fuel consumption:')
+        label4b = QtWidgets.QLabel('litres/kWh')
         
-        self.edit_sfc = QtGui.QLineEdit()
+        self.edit_sfc = QtWidgets.QLineEdit()
         self.edit_sfc.setFixedWidth(100)
         
-        label5a = QtGui.QLabel('AC/DC charger efficiency:')
-        label5b = QtGui.QLabel('% (DC coupled only)')
+        label5a = QtWidgets.QLabel('AC/DC charger efficiency:')
+        label5b = QtWidgets.QLabel('% (DC coupled only)')
         
-        self.edit_ChgEff = QtGui.QLineEdit()
+        self.edit_ChgEff = QtWidgets.QLineEdit()
         self.edit_ChgEff.setFixedWidth(100)
         
-        layout = QtGui.QGridLayout()
+        layout = QtWidgets.QGridLayout()
         layout.addWidget(title1, 0, 0)
         layout.addWidget(label1, 1, 0)
         layout.addWidget(self.edit_nGen, 1, 1)

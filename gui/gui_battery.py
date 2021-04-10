@@ -14,101 +14,101 @@ Authors: Julius Susanto
 Last edited: January 2018
 """
 
-from PyQt4 import QtCore, QtGui
+from PyQt5 import QtGui, QtWidgets
 import numpy as np
 import gui.globals as globals
 import gui.utility as utility
                       
-class battery_ui(QtGui.QWidget): 
+class battery_ui(QtWidgets.QWidget): 
     
     def setup(self, window):   
         """Set up and initialise battery tab"""
         
         self.main_window = window        
         
-        title1 = QtGui.QLabel('Battery configuration')
+        title1 = QtWidgets.QLabel('Battery configuration')
         title1.setFont(QtGui.QFont('arial', weight=QtGui.QFont.Bold))
         
-        label1 = QtGui.QLabel('No. batteries:')
+        label1 = QtWidgets.QLabel('No. batteries:')
         label1.setFixedWidth(100)
         
-        self.edit_nBatt = QtGui.QLineEdit()
+        self.edit_nBatt = QtWidgets.QLineEdit()
         self.edit_nBatt.setFixedWidth(100)
         
-        label2a = QtGui.QLabel('Nominal capacity:')
+        label2a = QtWidgets.QLabel('Nominal capacity:')
         label2a.setFixedWidth(100)
-        label2b = QtGui.QLabel('Ah')
+        label2b = QtWidgets.QLabel('Ah')
         
-        self.edit_Cnom = QtGui.QLineEdit()
+        self.edit_Cnom = QtWidgets.QLineEdit()
         self.edit_Cnom.setFixedWidth(100)
         
-        label3a = QtGui.QLabel('Nominal voltage:')
+        label3a = QtWidgets.QLabel('Nominal voltage:')
         label3a.setFixedWidth(100)
-        label3b = QtGui.QLabel('Vdc')
+        label3b = QtWidgets.QLabel('Vdc')
         label3b.setFixedWidth(50)
         
-        self.edit_Vdc = QtGui.QLineEdit()
+        self.edit_Vdc = QtWidgets.QLineEdit()
         self.edit_Vdc.setFixedWidth(100)
         
-        title2 = QtGui.QLabel('Battery discharge characteristics')
+        title2 = QtWidgets.QLabel('Battery discharge characteristics')
         title2.setFont(QtGui.QFont('arial', weight=QtGui.QFont.Bold))
         
         headings = ['Time (hours)', 'Capacity (A)']
         self.tableWidget = SolarTable(window, headings = headings, alternatingRowColors = True)
         #self.tableWidget.setMinimumHeight(200)
         
-        vline = QtGui.QFrame()
-        vline.setFrameStyle(QtGui.QFrame.VLine | QtGui.QFrame.Sunken)
+        vline = QtWidgets.QFrame()
+        vline.setFrameStyle(QtWidgets.QFrame.VLine | QtWidgets.QFrame.Sunken)
         
-        title3 = QtGui.QLabel('Battery charge parameters')
+        title3 = QtWidgets.QLabel('Battery charge parameters')
         title3.setFont(QtGui.QFont('arial', weight=QtGui.QFont.Bold))
         
-        label4a = QtGui.QLabel('Battery converter / inverter efficiency:')
-        label4b = QtGui.QLabel('%')
+        label4a = QtWidgets.QLabel('Battery converter / inverter efficiency:')
+        label4b = QtWidgets.QLabel('%')
         
-        self.edit_effConv = QtGui.QLineEdit()
+        self.edit_effConv = QtWidgets.QLineEdit()
         self.edit_effConv.setFixedWidth(100)
         
-        label5a = QtGui.QLabel('Battery initial state of charge:')
-        label5b = QtGui.QLabel('%')
+        label5a = QtWidgets.QLabel('Battery initial state of charge:')
+        label5b = QtWidgets.QLabel('%')
         
-        self.edit_initSOC = QtGui.QLineEdit()
+        self.edit_initSOC = QtWidgets.QLineEdit()
         self.edit_initSOC.setFixedWidth(100)
         
-        label6a = QtGui.QLabel('Battery minimum state of charge:')
-        label6b = QtGui.QLabel('%')
+        label6a = QtWidgets.QLabel('Battery minimum state of charge:')
+        label6b = QtWidgets.QLabel('%')
         
-        self.edit_minSOC = QtGui.QLineEdit()
+        self.edit_minSOC = QtWidgets.QLineEdit()
         self.edit_minSOC.setFixedWidth(100)
         
-        title4 = QtGui.QLabel('Battery ramp control parameters')
+        title4 = QtWidgets.QLabel('Battery ramp control parameters')
         title4.setFont(QtGui.QFont('arial', weight=QtGui.QFont.Bold))
         
-        label7a = QtGui.QLabel('PV output setpoint for ramp control:')
-        label7b = QtGui.QLabel('W')
+        label7a = QtWidgets.QLabel('PV output setpoint for ramp control:')
+        label7b = QtWidgets.QLabel('W')
         
-        self.edit_Pset = QtGui.QLineEdit()
+        self.edit_Pset = QtWidgets.QLineEdit()
         self.edit_Pset.setFixedWidth(100)
         
-        label8a = QtGui.QLabel('Ramp control start time:')
-        label8b = QtGui.QLabel('hour')
+        label8a = QtWidgets.QLabel('Ramp control start time:')
+        label8b = QtWidgets.QLabel('hour')
         
-        self.edit_Ton = QtGui.QLineEdit()
+        self.edit_Ton = QtWidgets.QLineEdit()
         self.edit_Ton.setFixedWidth(100)
         
-        label9a = QtGui.QLabel('Ramp control stop time:')
-        label9b = QtGui.QLabel('hour')
+        label9a = QtWidgets.QLabel('Ramp control stop time:')
+        label9b = QtWidgets.QLabel('hour')
         
-        self.edit_Toff = QtGui.QLineEdit()
+        self.edit_Toff = QtWidgets.QLineEdit()
         self.edit_Toff.setFixedWidth(100)
         
-        label10a = QtGui.QLabel('Cycle charging SOC setpoint:')
-        label10b = QtGui.QLabel('%')
+        label10a = QtWidgets.QLabel('Cycle charging SOC setpoint:')
+        label10b = QtWidgets.QLabel('%')
         
-        self.edit_SOC_cyc = QtGui.QLineEdit()
+        self.edit_SOC_cyc = QtWidgets.QLineEdit()
         self.edit_SOC_cyc.setFixedWidth(100)
         
-        layout = QtGui.QGridLayout()
+        layout = QtWidgets.QGridLayout()
         layout.addWidget(title1, 0, 0)
         layout.addWidget(label1, 1, 0)
         layout.addWidget(self.edit_nBatt, 1, 1)
@@ -236,6 +236,6 @@ class SolarTable(utility.CentaurTable):
                 for r in range(0, data_rows):
                     # Update real columns
                     for c in range(2):
-                        item = QtGui.QTableWidgetItem()                        
+                        item = QtWidgets.QTableWidgetItem()                        
                         item.setText(str(data[r][c]))      
                         self.setItem(r, c, item)

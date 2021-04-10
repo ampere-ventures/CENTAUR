@@ -22,7 +22,7 @@ CENTAUR has the following dependencies:
 
 * [Python](https://www.python.org) 3 or later.
 * [SciPy Stack](https://scipy.org) 0.9 or later.
-* [PyQT4](https://www.riverbankcomputing.com/software/pyqt/download)
+* [PyQT5](https://www.riverbankcomputing.com/software/pyqt/download)
 
 Documentation
 -------------
@@ -32,6 +32,6 @@ Refer to the [CENTAUR Wiki](https://github.com/susantoj/CENTAUR/wiki).
 License & Copyright
 -------------------
 
-Copyright (C) 2017-2018 Julius Susanto. All rights reserved.
+Copyright (C) 2017-2021 Julius Susanto. All rights reserved.
 
 The code is distributed under the 3-clause BSD license found in the LICENSE file.

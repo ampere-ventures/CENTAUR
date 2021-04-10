@@ -14,34 +14,34 @@ Authors: Julius Susanto
 Last edited: January 2018
 """
 
-from PyQt4 import QtCore, QtGui
+from PyQt5 import QtGui, QtWidgets
 import numpy as np
 import gui.globals as globals
 import gui.utility as utility
                       
-class loads_ui(QtGui.QWidget): 
+class loads_ui(QtWidgets.QWidget): 
     
     def setup(self, window):   
         """Set up and initialise loads tab"""
         
         self.main_window = window        
         
-        title1 = QtGui.QLabel('Load variability')
+        title1 = QtWidgets.QLabel('Load variability')
         title1.setFont(QtGui.QFont('arial', weight=QtGui.QFont.Bold))
         
-        label1 = QtGui.QLabel('Summer Dispersion:')
+        label1 = QtWidgets.QLabel('Summer Dispersion:')
         label1.setFixedWidth(100)
         
-        self.edit_sigma_s = QtGui.QLineEdit()
+        self.edit_sigma_s = QtWidgets.QLineEdit()
         self.edit_sigma_s.setFixedWidth(100)
         
-        label2 = QtGui.QLabel('Winter Dispersion:')
+        label2 = QtWidgets.QLabel('Winter Dispersion:')
         label2.setFixedWidth(100)
         
-        self.edit_sigma_w = QtGui.QLineEdit()
+        self.edit_sigma_w = QtWidgets.QLineEdit()
         self.edit_sigma_w.setFixedWidth(100)
         
-        title2 = QtGui.QLabel('Hourly load data')
+        title2 = QtWidgets.QLabel('Hourly load data')
         title2.setFont(QtGui.QFont('arial', weight=QtGui.QFont.Bold))
         
         headings = ['Summer (kW)', 'Winter (kW)']
@@ -51,7 +51,7 @@ class loads_ui(QtGui.QWidget):
         self.tableWidget.setRowCount(len(vheadings)) 
         self.tableWidget.setVerticalHeaderLabels(vheadings)
         
-        layout = QtGui.QGridLayout()
+        layout = QtWidgets.QGridLayout()
         layout.addWidget(title1, 0, 0)
         layout.addWidget(label1, 1, 0)
         layout.addWidget(self.edit_sigma_s, 1, 1)
@@ -126,6 +126,6 @@ class SolarTable(utility.CentaurTable):
                 for r in range(0, data_rows):
                     # Update real columns
                     for c in range(2):
-                        item = QtGui.QTableWidgetItem()                        
+                        item = QtWidgets.QTableWidgetItem()                        
                         item.setText(str(data[r][c]))      
                         self.setItem(r, c, item)

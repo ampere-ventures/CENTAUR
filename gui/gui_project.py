@@ -14,40 +14,39 @@ Authors: Julius Susanto
 Last edited: January 2018
 """
 
-from PyQt4 import QtCore, QtGui
-import numpy as np
+from PyQt5 import QtGui, QtWidgets
 import gui.globals as globals
 import gui.utility as utility
                       
-class project_ui(QtGui.QWidget): 
+class project_ui(QtWidgets.QWidget): 
     
     def setup(self, window):
         """Set up and initialise project tab"""
         
         self.main_window = window        
         
-        title1 = QtGui.QLabel('Project information')
+        title1 = QtWidgets.QLabel('Project information')
         title1.setFont(QtGui.QFont('arial', weight=QtGui.QFont.Bold))
         
-        label1 = QtGui.QLabel('Title:')
-        self.edit_title = QtGui.QLineEdit()
+        label1 = QtWidgets.QLabel('Title:')
+        self.edit_title = QtWidgets.QLineEdit()
         self.edit_title.setFixedWidth(300)
         
-        label2 = QtGui.QLabel('Description:')
-        self.edit_desc = QtGui.QTextEdit()
+        label2 = QtWidgets.QLabel('Description:')
+        self.edit_desc = QtWidgets.QTextEdit()
         
-        title2 = QtGui.QLabel('System setup')
+        title2 = QtWidgets.QLabel('System setup')
         title2.setFont(QtGui.QFont('arial', weight=QtGui.QFont.Bold))
         
-        label3 = QtGui.QLabel('Hybrid system configuration:')
-        self.combo_config = QtGui.QComboBox()
+        label3 = QtWidgets.QLabel('Hybrid system configuration:')
+        self.combo_config = QtWidgets.QComboBox()
         self.combo_config.addItems(["Genset","PV-Genset","PV-Battery","PV-Battery-Genset"])
         
-        label4 = QtGui.QLabel('Control mode:')
-        self.combo_ctrl = QtGui.QComboBox()
+        label4 = QtWidgets.QLabel('Control mode:')
+        self.combo_ctrl = QtWidgets.QComboBox()
         self.combo_ctrl.addItems(["Mode 1: Battery grid former, genset backup","Mode 2: Mixed master, genset cycle charging","Mode 3: Mixed master, genset load following","Mode 4: Genset grid former, battery ramp control"])
         
-        layout = QtGui.QGridLayout()
+        layout = QtWidgets.QGridLayout()
         layout.addWidget(title1, 0, 0)
         layout.addWidget(label1, 1, 0)
         layout.addWidget(self.edit_title, 1, 1)
